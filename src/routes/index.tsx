@@ -3,14 +3,14 @@ import { Button, Stack, Typography } from '@mui/material'
 import z from 'zod'
 import {VerticalSlider} from '~/components/VerticalSlider/VerticalSlider'
 
-export const Route = createFileRoute('/')({
-  validateSearch: z.object({
-    count: z.number().optional(),
-  }),
-  component: RouteComponent,
-})
+// export const Route = createFileRoute('/')({
+//   validateSearch: z.object({
+//     count: z.number().optional(),
+//   }),
+//   component: RouteComponent,
+// })
 
-function RouteComponent() {
+export function RouteComponent() {
   return (
     <Stack alignItems="center">
       <section id="hero">
