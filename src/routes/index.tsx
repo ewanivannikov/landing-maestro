@@ -2,8 +2,6 @@ import { createFileRoute } from '@tanstack/react-router'
 import { Button, Stack, Typography } from '@mui/material'
 import z from 'zod'
 import { Counter } from '~/components/Counter'
-import VerticalCarousel from '~/components/VerticalCarousel/VerticalCarousel'
-import { config } from "react-spring";
 import {VerticalSlider} from '~/components/VerticalSlider/VerticalSlider'
 
 export const Route = createFileRoute('/')({

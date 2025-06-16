@@ -1,1 +1,5 @@
 node_modules
+dist
+.nitro
+.output
+.tanstack/start/build/client-dist
