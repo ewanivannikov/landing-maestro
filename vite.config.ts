@@ -11,4 +11,5 @@ export default defineConfig({
       projects: ['./tsconfig.json'],
     }),
   ],
+  base: "",
 })
