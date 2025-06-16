@@ -47,6 +47,7 @@ const router = createRouter({
   defaultPreload: 'intent',
   defaultStaleTime: 5000,
   scrollRestoration: true,
+  basepath: import.meta.env.PROD ? '/landing-maestro/' : '/',
 })
 
 const rootElement = document.getElementById('app')!
