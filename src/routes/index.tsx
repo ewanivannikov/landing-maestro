@@ -1,7 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Button, Stack, Typography } from '@mui/material'
 import z from 'zod'
-import { Counter } from '~/components/Counter'
 import {VerticalSlider} from '~/components/VerticalSlider/VerticalSlider'
 
 export const Route = createFileRoute('/')({
@@ -17,7 +16,15 @@ function RouteComponent() {
       <section id="hero">
         <h1>Маэстро</h1>
         <h2>История о том, как музыка помогает преодолеть блокаду, болезни и трагедии. Помогите нам рассказать ее миру.</h2>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/4_JVrkIOfBU?si=s9hGz1b4b-umNplq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe 
+        width="560" 
+        height="315" 
+        src="https://www.youtube.com/embed/4_JVrkIOfBU?si=s9hGz1b4b-umNplq" 
+        title="YouTube video player"  
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        >
+
+        </iframe>
         <Button variant="contained">
           ПОДДЕРЖАТЬ ПРОЕКТ
         </Button>
