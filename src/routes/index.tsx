@@ -12,12 +12,13 @@ import {
   CardMedia,
 } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import TelegramIcon from '@mui/icons-material/Telegram';
-import YouTubeIcon from '@mui/icons-material/YouTube';
+import LinkedInIcon from '@mui/icons-material/LinkedIn'
+import TelegramIcon from '@mui/icons-material/Telegram'
+import YouTubeIcon from '@mui/icons-material/YouTube'
 import z from 'zod'
 import React, { useState } from 'react'
-import Slider from 'react-slick'
+// FIX: Импортируем тип Settings для настроек слайдера
+import Slider, { Settings } from 'react-slick'
 
 // Импорт стилей для react-slick
 import 'slick-carousel/slick/slick.css'
@@ -30,12 +31,21 @@ import 'slick-carousel/slick/slick-theme.css'
 //   component: RouteComponent,
 // })
 
-export function RouteComponent() {
-  // --- State для модального окна (Секция 3) ---
-  const [modalOpen, setModalOpen] = useState(false)
-  const [selectedEvent, setSelectedEvent] = useState(null)
+// FIX: Создаем интерфейс для объекта события, чтобы использовать его повторно
+interface TimelineEvent {
+  year: string
+  title: string
+  description: string
+}
 
-  const timelineEvents = [
+// FIX: Добавляем тип возвращаемого значения для компонента
+export function RouteComponent(): React.JSX.Element {
+  // FIX: Четко указываем тип для состояния: это может быть объект события или null
+  const [modalOpen, setModalOpen] = useState(false)
+  const [selectedEvent, setSelectedEvent] = useState<TimelineEvent | null>(null)
+
+  // FIX: Применяем созданный интерфейс к нашему массиву данных
+  const timelineEvents: TimelineEvent[] = [
     {
       year: '~1942',
       title: 'Ужасы блокады и эвакуация',
@@ -78,7 +88,8 @@ export function RouteComponent() {
     },
   ]
 
-  const handleOpenModal = (event) => {
+  // FIX: Типизируем входящий аргумент 'event'
+  const handleOpenModal = (event: TimelineEvent) => {
     setSelectedEvent(event)
     setModalOpen(true)
   }
@@ -89,7 +100,8 @@ export function RouteComponent() {
   }
 
   // --- Настройки для слайдеров ---
-  const verticalSliderSettings = {
+  // FIX: Добавляем тип Settings для объекта с настройками
+  const verticalSliderSettings: Settings = {
     dots: true,
     infinite: true,
     slidesToShow: 1,
@@ -99,9 +111,10 @@ export function RouteComponent() {
     arrows: false,
     autoplay: true,
     speed: 1000,
-  };
+  }
 
-  const teamSliderSettings = {
+  // FIX: Добавляем тип Settings для объекта с настройками
+  const teamSliderSettings: Settings = {
     dots: true,
     infinite: true,
     speed: 500,
@@ -121,7 +134,7 @@ export function RouteComponent() {
         },
       },
     ],
-  };
+  }
 
 
   return (
