@@ -160,10 +160,10 @@ export function RouteComponent(): React.JSX.Element {
           p: 4,
         }}
       >
-        <Typography variant="h1" component="h1" fontWeight="bold" sx={{ textShadow: '2px 2px 8px rgba(0,0,0,0.7)' }}>
+        <Typography variant="h1" component="h1" fontWeight="bold" sx={{ textShadow: '2px 2px 8px rgba(0,0,0,0.7)', fontSize: {xs: '3rem', md: '6rem'} }}>
           Маэстро
         </Typography>
-        <Typography variant="h4" component="h2" maxWidth="md" mt={2} mb={4} sx={{ textShadow: '1px 1px 6px rgba(0,0,0,0.8)' }}>
+        <Typography variant="h4" component="h2" maxWidth="md" mt={2} mb={4} sx={{ textShadow: '1px 1px 6px rgba(0,0,0,0.8)', fontSize: {xs: '1.2rem', md: '2.125rem'} }}>
           История о том, как музыка помогает преодолеть блокаду, болезни и трагедии. Помогите нам рассказать ее миру.
         </Typography>
         <Box sx={{ width: '100%', maxWidth: '720px', aspectRatio: '16 / 9', mb: 4, boxShadow: 8, borderRadius: 2, overflow: 'hidden' }}>
@@ -187,13 +187,11 @@ export function RouteComponent(): React.JSX.Element {
         <Typography variant="h3" component="h2" textAlign="center" gutterBottom mb={4}>
           Партитура одной жизни
         </Typography>
-        <Grid container spacing={4} alignItems="center">
-          <Grid item xs={12} md={6}>
-            <Typography variant="body1" fontSize="1.1rem" lineHeight={1.7}>
-              «Маэстро» – это документальный фильм-портрет о 85-летнем дирижере Германе Колбасникове. Его жизнь, подобно сложной партитуре, соткана из трагедии, стойкости и безграничной преданности музыке. Это гимн человеческому духу, который необходимо сохранить для будущих поколений.
-            </Typography>
-          </Grid>
-          <Grid item xs={12} md={6}>
+        <Grid container spacing={4} alignItems="center" >
+          <Typography variant="body1" fontSize="1.1rem" lineHeight={1.7} textAlign="center">
+            «Маэстро» – это документальный фильм-портрет о 85-летнем дирижере Германе Колбасникове. Его жизнь, подобно сложной партитуре, соткана из трагедии, стойкости и безграничной преданности музыке. Это гимн человеческому духу, который необходимо сохранить для будущих поколений.
+          </Typography>
+          {/* <Grid item xs={12} md={6}>
              <Box sx={{ height: '400px', p: 2, border: '1px solid #ddd', borderRadius: 2 }}>
               <Slider {...verticalSliderSettings}>
                 <div><img src="https://picsum.photos/seed/archive1/400/400" alt="Архивное фото 1" style={{ width: '100%', objectFit: 'cover' }} /></div>
@@ -201,7 +199,7 @@ export function RouteComponent(): React.JSX.Element {
                 <div><img src="https://picsum.photos/seed/archive3/400/400" alt="Архивное фото 3" style={{ width: '100%', objectFit: 'cover' }} /></div>
               </Slider>
             </Box>
-          </Grid>
+          </Grid> */}
         </Grid>
       </Box>
 
