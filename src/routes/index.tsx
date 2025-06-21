@@ -1,4 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { Chrono } from 'react-chrono'
 import {
   Button,
   Stack,
@@ -10,6 +11,8 @@ import {
   Card,
   CardContent,
   CardMedia,
+  useMediaQuery,
+  useTheme,
 } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
@@ -44,49 +47,105 @@ export function RouteComponent(): React.JSX.Element {
   const [modalOpen, setModalOpen] = useState(false)
   const [selectedEvent, setSelectedEvent] = useState<TimelineEvent | null>(null)
 
+  const theme = useTheme();
+
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  
   // FIX: Применяем созданный интерфейс к нашему массиву данных
-  const timelineEvents: TimelineEvent[] = [
-    {
-      year: '~1942',
-      title: 'Ужасы блокады и эвакуация',
-      description: 'Пережитые в детстве ужасы блокады Ленинграда и последующая эвакуация оставили неизгладимый след в душе будущего маэстро.',
+  const chronoItems = [
+  {
+    // Поле 'year' из ваших данных стало 'title' - оно отображается на самой шкале времени.
+    title: '~1942',
+    // Поле 'title' из ваших данных стало 'cardTitle' - это заголовок на карточке.
+    cardTitle: 'Ужасы блокады и эвакуация',
+    // Поле 'description' стало 'cardDetailedText' - это основной текст на карточке.
+    cardDetailedText: 'Пережитые в детстве ужасы блокады Ленинграда и последующая эвакуация оставили неизгладимый след в душе будущего маэстро.',
+    // Для каждого события добавлено изображение-плейсхолдер.
+    media: {
+      type: 'IMAGE',
+      source: {
+        url: 'https://picsum.photos/seed/maestro-timeline-1/400/300',
+      },
     },
-    {
-      year: '~1955',
-      title: 'Расставание с музыкой',
-      description: 'Тяжелая болезнь (туберкулез) заставила Германа Давыдовича уйти из музыкальной школы, казалось, навсегда распрощавшись с мечтой.',
+  },
+  {
+    title: '~1955',
+    cardTitle: 'Расставание с музыкой',
+    cardDetailedText: 'Тяжелая болезнь (туберкулез) заставила Германа Давыдовича уйти из музыкальной школы, казалось, навсегда распрощавшись с мечтой.',
+    media: {
+      type: 'IMAGE',
+      source: {
+        url: 'https://picsum.photos/seed/maestro-timeline-2/400/300',
+      },
     },
-    {
-      year: '~1963',
-      title: 'Начало пути педагога',
-      description: 'Несмотря на все трудности, Колбасников начинает преподавательскую деятельность в Пензе, находя свое призвание в обучении других.',
+  },
+  {
+    title: '~1963',
+    cardTitle: 'Начало пути педагога',
+    cardDetailedText: 'Несмотря на все трудности, Колбасников начинает преподавательскую деятельность в Пензе, находя свое призвание в обучении других.',
+    media: {
+      type: 'IMAGE',
+      source: {
+        url: 'https://picsum.photos/seed/maestro-timeline-3/400/300',
+      },
     },
-    {
-      year: '1966',
-      title: 'Возвращение в Ленинград',
-      description: 'Возвращение в родной город ознаменовало новый этап в карьере — начало многолетней работы в Ленинградском областном колледже культуры и искусства (ЛОККИИ).',
+  },
+  {
+    title: '1966',
+    cardTitle: 'Возвращение в Ленинград',
+    cardDetailedText: 'Возвращение в родной город ознаменовало новый этап в карьере — начало многолетней работы в Ленинградском областном колледже культуры и искусства (ЛОККИИ).',
+    media: {
+      type: 'IMAGE',
+      source: {
+        url: 'https://picsum.photos/seed/maestro-timeline-4/400/300',
+      },
     },
-    {
-      year: '1985',
-      title: 'Создание хора ветеранов',
-      description: 'Герман Давыдович создает уникальный для своего времени хор ветеранов, даря пожилым людям возможность творческой реализации.',
+  },
+  {
+    title: '1985',
+    cardTitle: 'Создание хора ветеранов',
+    cardDetailedText: 'Герман Давыдович создает уникальный для своего времени хор ветеранов, даря пожилым людям возможность творческой реализации.',
+    media: {
+      type: 'IMAGE',
+      source: {
+        url: 'https://picsum.photos/seed/maestro-timeline-5/400/300',
+      },
     },
-    {
-      year: '1994',
-      title: 'Рождение "Альма Матер"',
-      description: 'По горячей просьбе выпускников рождается хор «Альма Матер», который станет делом всей его жизни и прославится на европейских сценах.',
+  },
+  {
+    title: '1994',
+    cardTitle: 'Рождение "Альма Матер"',
+    cardDetailedText: 'По горячей просьбе выпускников рождается хор «Альма Матер», который станет делом всей его жизни и прославится на европейских сценах.',
+    media: {
+      type: 'IMAGE',
+      source: {
+        url: 'https://picsum.photos/seed/maestro-timeline-6/400/300',
+      },
     },
-    {
-      year: '2002',
-      title: 'Мистическое исцеление',
-      description: 'Тяжелейшая травма позвоночника приковала Маэстро к постели, но благодаря невероятной силе воли и поддержке близких он смог вернуться к дирижерскому пульту.',
+  },
+  {
+    title: '2002',
+    cardTitle: 'Мистическое исцеление',
+    cardDetailedText: 'Тяжелейшая травма позвоночника приковала Маэстро к постели, но благодаря невероятной силе воли и поддержке близких он смог вернуться к дирижерскому пульту.',
+    media: {
+      type: 'IMAGE',
+      source: {
+        url: 'https://picsum.photos/seed/maestro-timeline-7/400/300',
+      },
     },
-    {
-      year: 'Сегодня',
-      title: 'Живая легенда',
-      description: 'Герман Колбасников — живая легенда, чье наследие продолжает жить в хоре «Альма Матер» и в сотнях его учеников по всему миру.',
+  },
+  {
+    title: 'Сегодня',
+    cardTitle: 'Живая легенда',
+    cardDetailedText: 'Герман Колбасников — живая легенда, чье наследие продолжает жить в хоре «Альма Матер» и в сотнях его учеников по всему миру.',
+    media: {
+      type: 'IMAGE',
+      source: {
+        url: 'https://picsum.photos/seed/maestro-timeline-8/400/300',
+      },
     },
-  ]
+  },
+];
 
   // FIX: Типизируем входящий аргумент 'event'
   const handleOpenModal = (event: TimelineEvent) => {
@@ -209,10 +268,20 @@ export function RouteComponent(): React.JSX.Element {
           <Typography variant="h3" component="h2" textAlign="center" gutterBottom>
             Путь Маэстро: от блокады до европейских сцен
           </Typography>
-          <Typography textAlign="center" color="text.secondary" mb={4}>
+          <div>
+            <Chrono
+            disableToolbar={true}
+            enableQuickJump={false}
+            useReadMore={false}
+            scrollable={{ scrollbar: true }}
+            items={chronoItems}
+            mode={isMobile ? 'VERTICAL' : 'HORIZONTAL'}
+            />
+          </div>
+          {/* <Typography textAlign="center" color="text.secondary" mb={4}>
             Нажмите на событие, чтобы узнать больше.
-          </Typography>
-          <Grid container spacing={2} justifyContent="center">
+          </Typography> */}
+          {/* <Grid container spacing={2} justifyContent="center">
             {timelineEvents.map((event, index) => (
               <Grid item key={index}>
                 <Button variant="outlined" onClick={() => handleOpenModal(event)}>
@@ -220,7 +289,7 @@ export function RouteComponent(): React.JSX.Element {
                 </Button>
               </Grid>
             ))}
-          </Grid>
+          </Grid> */}
         </Stack>
       </Box>
 
