@@ -5,7 +5,7 @@
     "public/script*.js"
   ],
   "compilerOptions": {
-    "strict": false,
+    "strict": true,
     "esModuleInterop": true,
     "jsx": "react-jsx",
     "module": "ESNext",
