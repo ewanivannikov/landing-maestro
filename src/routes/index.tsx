@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { Chrono } from 'react-chrono'
+import { Chrono, type TimelineItemModel } from 'react-chrono'
 import {
   Button,
   Stack,
@@ -52,7 +52,7 @@ export function RouteComponent(): React.JSX.Element {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   
   // FIX: Применяем созданный интерфейс к нашему массиву данных
-  const chronoItems = [
+  const chronoItems: TimelineItemModel[] = [
   {
     // Поле 'year' из ваших данных стало 'title' - оно отображается на самой шкале времени.
     title: '~1942',
