@@ -8,6 +8,7 @@ import {
   Grid,
   Modal,
   IconButton,
+  Avatar,
   Card,
   CardContent,
   CardMedia,
@@ -15,7 +16,7 @@ import {
   useTheme,
 } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
-import LinkedInIcon from '@mui/icons-material/LinkedIn'
+import { VkIcon } from '~/components/VkIcon';
 import TelegramIcon from '@mui/icons-material/Telegram'
 import YouTubeIcon from '@mui/icons-material/YouTube'
 import z from 'zod'
@@ -53,99 +54,99 @@ export function RouteComponent(): React.JSX.Element {
   
   // FIX: Применяем созданный интерфейс к нашему массиву данных
   const chronoItems: TimelineItemModel[] = [
-  {
-    // Поле 'year' из ваших данных стало 'title' - оно отображается на самой шкале времени.
-    title: '~1942',
-    // Поле 'title' из ваших данных стало 'cardTitle' - это заголовок на карточке.
-    cardTitle: 'Ужасы блокады и эвакуация',
-    // Поле 'description' стало 'cardDetailedText' - это основной текст на карточке.
-    cardDetailedText: 'Пережитые в детстве ужасы блокады Ленинграда и последующая эвакуация оставили неизгладимый след в душе будущего маэстро.',
-    // Для каждого события добавлено изображение-плейсхолдер.
-    media: {
-      type: 'IMAGE',
-      source: {
-        url: 'https://picsum.photos/seed/maestro-timeline-1/400/300',
+    {
+      // Поле 'year' из ваших данных стало 'title' - оно отображается на самой шкале времени.
+      title: '~1942',
+      // Поле 'title' из ваших данных стало 'cardTitle' - это заголовок на карточке.
+      cardTitle: 'Ужасы блокады и эвакуация',
+      // Поле 'description' стало 'cardDetailedText' - это основной текст на карточке.
+      cardDetailedText: 'Пережитые в детстве ужасы блокады Ленинграда и последующая эвакуация оставили неизгладимый след в душе будущего маэстро.',
+      // Для каждого события добавлено изображение-плейсхолдер.
+      media: {
+        type: 'IMAGE',
+        source: {
+          url: 'https://picsum.photos/seed/maestro-timeline-1/400/300',
+        },
       },
     },
-  },
-  {
-    title: '~1955',
-    cardTitle: 'Расставание с музыкой',
-    cardDetailedText: 'Тяжелая болезнь (туберкулез) заставила Германа Давыдовича уйти из музыкальной школы, казалось, навсегда распрощавшись с мечтой.',
-    media: {
-      type: 'IMAGE',
-      source: {
-        url: 'https://picsum.photos/seed/maestro-timeline-2/400/300',
+    {
+      title: '~1955',
+      cardTitle: 'Расставание с музыкой',
+      cardDetailedText: 'Тяжелая болезнь (туберкулез) заставила Германа Давыдовича уйти из музыкальной школы, казалось, навсегда распрощавшись с мечтой.',
+      media: {
+        type: 'IMAGE',
+        source: {
+          url: 'https://picsum.photos/seed/maestro-timeline-2/400/300',
+        },
       },
     },
-  },
-  {
-    title: '~1963',
-    cardTitle: 'Начало пути педагога',
-    cardDetailedText: 'Несмотря на все трудности, Колбасников начинает преподавательскую деятельность в Пензе, находя свое призвание в обучении других.',
-    media: {
-      type: 'IMAGE',
-      source: {
-        url: 'https://picsum.photos/seed/maestro-timeline-3/400/300',
+    {
+      title: '~1963',
+      cardTitle: 'Начало пути педагога',
+      cardDetailedText: 'Несмотря на все трудности, Колбасников начинает преподавательскую деятельность в Пензе, находя свое призвание в обучении других.',
+      media: {
+        type: 'IMAGE',
+        source: {
+          url: 'https://picsum.photos/seed/maestro-timeline-3/400/300',
+        },
       },
     },
-  },
-  {
-    title: '1966',
-    cardTitle: 'Возвращение в Ленинград',
-    cardDetailedText: 'Возвращение в родной город ознаменовало новый этап в карьере — начало многолетней работы в Ленинградском областном колледже культуры и искусства (ЛОККИИ).',
-    media: {
-      type: 'IMAGE',
-      source: {
-        url: 'https://picsum.photos/seed/maestro-timeline-4/400/300',
+    {
+      title: '1966',
+      cardTitle: 'Возвращение в Ленинград',
+      cardDetailedText: 'Возвращение в родной город ознаменовало новый этап в карьере — начало многолетней работы в Ленинградском областном колледже культуры и искусства (ЛОККИИ).',
+      media: {
+        type: 'IMAGE',
+        source: {
+          url: 'https://picsum.photos/seed/maestro-timeline-4/400/300',
+        },
       },
     },
-  },
-  {
-    title: '1985',
-    cardTitle: 'Создание хора ветеранов',
-    cardDetailedText: 'Герман Давыдович создает уникальный для своего времени хор ветеранов, даря пожилым людям возможность творческой реализации.',
-    media: {
-      type: 'IMAGE',
-      source: {
-        url: 'https://picsum.photos/seed/maestro-timeline-5/400/300',
+    {
+      title: '1985',
+      cardTitle: 'Создание хора ветеранов',
+      cardDetailedText: 'Герман Давыдович создает уникальный для своего времени хор ветеранов, даря пожилым людям возможность творческой реализации.',
+      media: {
+        type: 'IMAGE',
+        source: {
+          url: 'https://picsum.photos/seed/maestro-timeline-5/400/300',
+        },
       },
     },
-  },
-  {
-    title: '1994',
-    cardTitle: 'Рождение "Альма Матер"',
-    cardDetailedText: 'По горячей просьбе выпускников рождается хор «Альма Матер», который станет делом всей его жизни и прославится на европейских сценах.',
-    media: {
-      type: 'IMAGE',
-      source: {
-        url: 'https://picsum.photos/seed/maestro-timeline-6/400/300',
+    {
+      title: '1994',
+      cardTitle: 'Рождение "Альма Матер"',
+      cardDetailedText: 'По горячей просьбе выпускников рождается хор «Альма Матер», который станет делом всей его жизни и прославится на европейских сценах.',
+      media: {
+        type: 'IMAGE',
+        source: {
+          url: 'https://picsum.photos/seed/maestro-timeline-6/400/300',
+        },
       },
     },
-  },
-  {
-    title: '2002',
-    cardTitle: 'Мистическое исцеление',
-    cardDetailedText: 'Тяжелейшая травма позвоночника приковала Маэстро к постели, но благодаря невероятной силе воли и поддержке близких он смог вернуться к дирижерскому пульту.',
-    media: {
-      type: 'IMAGE',
-      source: {
-        url: 'https://picsum.photos/seed/maestro-timeline-7/400/300',
+    {
+      title: '2002',
+      cardTitle: 'Мистическое исцеление',
+      cardDetailedText: 'Тяжелейшая травма позвоночника приковала Маэстро к постели, но благодаря невероятной силе воли и поддержке близких он смог вернуться к дирижерскому пульту.',
+      media: {
+        type: 'IMAGE',
+        source: {
+          url: 'https://picsum.photos/seed/maestro-timeline-7/400/300',
+        },
       },
     },
-  },
-  {
-    title: 'Сегодня',
-    cardTitle: 'Живая легенда',
-    cardDetailedText: 'Герман Колбасников — живая легенда, чье наследие продолжает жить в хоре «Альма Матер» и в сотнях его учеников по всему миру.',
-    media: {
-      type: 'IMAGE',
-      source: {
-        url: 'https://picsum.photos/seed/maestro-timeline-8/400/300',
+    {
+      title: 'Сегодня',
+      cardTitle: 'Живая легенда',
+      cardDetailedText: 'Герман Колбасников — живая легенда, чье наследие продолжает жить в хоре «Альма Матер» и в сотнях его учеников по всему миру.',
+      media: {
+        type: 'IMAGE',
+        source: {
+          url: 'https://picsum.photos/seed/maestro-timeline-8/400/300',
+        },
       },
     },
-  },
-];
+  ];
 
   // FIX: Типизируем входящий аргумент 'event'
   const handleOpenModal = (event: TimelineEvent) => {
@@ -195,71 +196,150 @@ export function RouteComponent(): React.JSX.Element {
     ],
   }
 
+  // Настройки для ДЕСКТОПА (горизонтальный, несколько слайдов)
+  const productionSliderSettingsDesktop: Settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+    ],
+  };
+
+  // Настройки для МОБИЛЬНЫХ (вертикальный, один слайд)
+  const productionSliderSettingsMobile: Settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    vertical: true, // Главное отличие!
+    verticalSwiping: true,
+  };
+
+  const productionSliderSettings = isMobile 
+    ? productionSliderSettingsMobile 
+    : productionSliderSettingsDesktop;
 
   return (
     <Stack alignItems="center" width="100%">
-      {/* ======================== СЕКЦИЯ 1: HERO ======================== */}
+            {/* ======================== СЕКЦИЯ 1: HERO (ИСПРАВЛЕННАЯ) ======================== */}
       <Box
         id="hero"
         component="section"
+        // --- ВНЕШНИЙ КОНТЕЙНЕР (ДЛЯ ФОНА) ---
         sx={{
+          // Задачи этого блока:
+          // 1. Растянуть фон на всю ширину экрана.
+          // 2. Отцентрировать внутренний блок с контентом.
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
           minHeight: '100vh',
-          width: '100%',
+          width: '100vw', // Занимает 100% ширины ОКНА, а не родителя
+          // Убираем все отступы, чтобы фон прилегал к краям
+          p: 0, 
+          // Стили для фона остаются здесь
           backgroundImage: 'url(https://picsum.photos/seed/maestro-hero/1920/1080)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundColor: 'rgba(0, 0, 0, 0.6)',
           backgroundBlendMode: 'multiply',
           color: 'white',
-          textAlign: 'center',
-          p: 4,
         }}
       >
-        <Typography variant="h1" component="h1" fontWeight="bold" sx={{ textShadow: '2px 2px 8px rgba(0,0,0,0.7)', fontSize: {xs: '3rem', md: '6rem'} }}>
-          Маэстро
+        {/* --- ВНУТРЕННИЙ КОНТЕЙНЕР (ДЛЯ КОНТЕНТА) --- */}
+        <Stack
+          alignItems="center"
+          textAlign="center"
+          sx={{
+            // Задачи этого блока:
+            // 1. Управлять отступами для контента.
+            // 2. Ограничить максимальную ширину контента на больших экранах.
+            width: '100%',
+            maxWidth: 'lg', // Ограничиваем ширину, чтобы текст не был слишком длинным на ПК
+            p: { xs: 0, md: 4 }, // А вот и наши отступы! Маленькие на мобильных, большие на ПК.
+          }}
+        >
+          {/* Вся "начинка" теперь живет здесь */}
+          <Typography 
+            variant="h1" 
+            component="h1" 
+            fontWeight="bold" 
+            sx={{ 
+              textShadow: '2px 2px 8px rgba(0,0,0,0.7)',
+              fontSize: { xs: '3rem', md: '5rem' } // Немного уменьшил для ПК
+            }}
+          >
+            Маэстро
+          </Typography>
+          <Typography 
+            variant="h4" 
+            component="h2" 
+            maxWidth="md" 
+            mt={2} mb={4} 
+            sx={{ 
+              textShadow: '1px 1px 6px rgba(0,0,0,0.8)',
+              fontSize: { xs: '1.2rem', md: '2.125rem' } 
+            }}
+          >
+            История о том, как музыка помогает преодолеть блокаду, болезни и трагедии. Помогите нам рассказать ее миру.
+          </Typography>
+          <Box sx={{ width: '100%', maxWidth: '720px', aspectRatio: '16 / 9', mb: 4, boxShadow: 8, borderRadius: 2, overflow: 'hidden' }}>
+            <iframe
+              width="100%"
+              height="100%"
+              src="https://www.youtube.com/embed/4_JVrkIOfBU?si=s9hGz1b4b-umNplq"
+              title="YouTube video player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              style={{ border: 0 }}
+            ></iframe>
+          </Box>
+          <Button variant="contained" size="large" color="primary">
+            ПОДДЕРЖАТЬ ПРОЕКТ
+          </Button>
+        </Stack>
+      </Box>
+
+      {/* ======================== СЕКЦИЯ 2: О ФИЛЬМЕ ======================== */}
+      <Box 
+      component="section"
+      sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          minHeight: '100vh',
+          width: '100vw', // Занимает 100% ширины ОКНА, а не родителя
+          // Убираем все отступы, чтобы фон прилегал к краям
+          p: 0, 
+          // Стил
+        }}
+      >
+        <Typography variant="h3" component="h2" textAlign="center" gutterBottom mb={4}>
+          Партитура одной жизни
         </Typography>
-        <Typography variant="h4" component="h2" maxWidth="md" mt={2} mb={4} sx={{ textShadow: '1px 1px 6px rgba(0,0,0,0.8)', fontSize: {xs: '1.2rem', md: '2.125rem'} }}>
-          История о том, как музыка помогает преодолеть блокаду, болезни и трагедии. Помогите нам рассказать ее миру.
+        <Typography variant="body1" fontSize="1.1rem" lineHeight={1.7} textAlign="center">
+          «Маэстро» – это документальный фильм-портрет о 85-летнем дирижере Германе Колбасникове. Его жизнь, подобно сложной партитуре, соткана из трагедии, стойкости и безграничной преданности музыке. Это гимн человеческому духу, который необходимо сохранить для будущих поколений.
         </Typography>
         <Box sx={{ width: '100%', maxWidth: '720px', aspectRatio: '16 / 9', mb: 4, boxShadow: 8, borderRadius: 2, overflow: 'hidden' }}>
           <iframe
             width="100%"
             height="100%"
-            src="https://www.youtube.com/embed/4_JVrkIOfBU?si=s9hGz1b4b-umNplq"
+            src="https://www.youtube.com/embed/7vaiq0qxPmw?si=9NtK-W5Ug4j9Bo-O"
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             style={{ border: 0 }}
           ></iframe>
         </Box>
-        {/* Примечание: Кнопка пока не ведет к Секции 4, т.к. она пропущена по ТЗ. */}
-        <Button variant="contained" size="large" color="primary">
-          ПОДДЕРЖАТЬ ПРОЕКТ
-        </Button>
-      </Box>
-
-      {/* ======================== СЕКЦИЯ 2: О ФИЛЬМЕ ======================== */}
-      <Box component="section" sx={{ p: { xs: 2, md: 6 }, maxWidth: '1200px' }}>
-        <Typography variant="h3" component="h2" textAlign="center" gutterBottom mb={4}>
-          Партитура одной жизни
-        </Typography>
-        <Grid container spacing={4} alignItems="center" >
-          <Typography variant="body1" fontSize="1.1rem" lineHeight={1.7} textAlign="center">
-            «Маэстро» – это документальный фильм-портрет о 85-летнем дирижере Германе Колбасникове. Его жизнь, подобно сложной партитуре, соткана из трагедии, стойкости и безграничной преданности музыке. Это гимн человеческому духу, который необходимо сохранить для будущих поколений.
-          </Typography>
-          {/* <Grid item xs={12} md={6}>
-             <Box sx={{ height: '400px', p: 2, border: '1px solid #ddd', borderRadius: 2 }}>
-              <Slider {...verticalSliderSettings}>
-                <div><img src="https://picsum.photos/seed/archive1/400/400" alt="Архивное фото 1" style={{ width: '100%', objectFit: 'cover' }} /></div>
-                <div><img src="https://picsum.photos/seed/archive2/400/400" alt="Архивное фото 2" style={{ width: '100%', objectFit: 'cover' }} /></div>
-                <div><img src="https://picsum.photos/seed/archive3/400/400" alt="Архивное фото 3" style={{ width: '100%', objectFit: 'cover' }} /></div>
-              </Slider>
-            </Box>
-          </Grid> */}
-        </Grid>
       </Box>
 
       {/* ======================== СЕКЦИЯ 3: ГЕРОЙ В ЦЕНТРЕ ИСТОРИИ ======================== */}
@@ -336,19 +416,30 @@ export function RouteComponent(): React.JSX.Element {
               { name: 'Иван Петров', role: 'Оператор-постановщик', img: 'https://picsum.photos/seed/team2/300/300' },
               { name: 'Анна Сидорова', role: 'Продюсер', img: 'https://picsum.photos/seed/team3/300/300' },
               { name: 'Алексей Смирнов', role: 'Звукорежиссер', img: 'https://picsum.photos/seed/team4/300/300' },
-            ].map((member, index) => (
-              <Grid item xs={12} sm={6} md={3} key={index}>
-                <Card sx={{ textAlign: 'center' }}>
-                  <CardMedia component="img" height="250" image={member.img} alt={member.name} />
-                  <CardContent>
-                    <Typography gutterBottom variant="h6" component="div">
+            ].map((member) => (
+              <Grid item xs={12} sm={6} md={3} key={member.name}>
+                <Stack alignItems="center" spacing={2}>
+                  <Avatar
+                    alt={member.name}
+                    src={member.img}
+                    sx={{
+                      // Делаем аватар большим и адаптивным
+                      width: { xs: 140, md: 160 },
+                      height: { xs: 140, md: 160 },
+                      // Добавим небольшую тень для объема
+                      boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+                      border: '3px solid white'
+                    }}
+                  />
+                  <Box textAlign="center">
+                    <Typography variant="h6" component="div">
                       {member.name}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography color="text.secondary">
                       {member.role}
                     </Typography>
-                  </CardContent>
-                </Card>
+                  </Box>
+                </Stack>
               </Grid>
             ))}
           </Grid>
@@ -361,8 +452,31 @@ export function RouteComponent(): React.JSX.Element {
           <Typography variant="h3" component="h2" textAlign="center" gutterBottom>
             Загляните за кулисы
           </Typography>
-          <Box sx={{ width: '100%', p: 2 }}>
-            <Slider {...teamSliderSettings}>
+          
+          {/* FIX 4: Добавляем Box-обертку со стилями для точек на мобильных */}
+          <Box sx={{
+            width: '100%',
+            p: 2,
+            // Стили применяются ТОЛЬКО на мобильных
+            ...(isMobile && {
+              // Для вертикального слайдера нужно переопределить позицию точек
+              '.slick-dots': {
+                position: 'relative', // Убираем 'absolute'
+                bottom: 'auto', // Сбрасываем позиционирование снизу
+                marginTop: '16px', // Добавляем отступ сверху
+              },
+              '.slick-dots li': {
+                display: 'inline-block', // Выстраиваем точки в ряд
+                margin: '0 5px',
+              },
+              // Ограничиваем высоту слайдера, чтобы он не уезжал за экран
+              '.slick-slider': {
+                maxHeight: '450px',
+              }
+            })
+          }}>
+            {/* Используем выбранный объект настроек */}
+            <Slider {...productionSliderSettings}>
               {[
                 { title: 'Съёмки в ЛОККиИ', img: 'https://picsum.photos/seed/prod1/600/400' },
                 { title: 'Съёмки в Феодоровском соборе', img: 'https://picsum.photos/seed/prod2/600/400' },
@@ -370,8 +484,8 @@ export function RouteComponent(): React.JSX.Element {
                 { title: 'Интервью с Маэстро', img: 'https://picsum.photos/seed/prod4/600/400' },
                 { title: 'Работа с архивами', img: 'https://picsum.photos/seed/prod5/600/400' },
               ].map((shot, index) => (
-                <Box key={index} sx={{ p: 2 }}>
-                  <Card>
+                <Box key={index} sx={{ px: 0, py: 1 }}>
+                  <Card sx={{ mx: { xs: 0, sm: 1} }}>
                      <CardMedia component="img" height="250" image={shot.img} alt={shot.title} />
                      <CardContent>
                         <Typography variant="h6" component="div" textAlign="center">
@@ -391,7 +505,7 @@ export function RouteComponent(): React.JSX.Element {
          <Stack alignItems="center" spacing={3}>
             <Typography variant="h4" component="h2">Следите за новостями</Typography>
             <Stack direction="row" spacing={2}>
-              <IconButton color="primary" href="#" aria-label="ВКонтакте"><LinkedInIcon fontSize='large' /></IconButton>
+              <IconButton color="primary" href="#" aria-label="ВКонтакте"><VkIcon fontSize='large' /></IconButton>
               <IconButton color="primary" href="#" aria-label="Telegram"><TelegramIcon fontSize='large'/></IconButton>
               <IconButton color="primary" href="#" aria-label="YouTube"><YouTubeIcon fontSize='large'/></IconButton>
             </Stack>
