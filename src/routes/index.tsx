@@ -529,7 +529,7 @@ export function RouteComponent(): React.JSX.Element {
          textAlign: 'center'
       }}>
          <Typography variant="body2">
-           © 2024, Документальный фильм «Маэстро». Все права защищены.
+           © 2025, Документальный фильм «Маэстро». Все права защищены.
          </Typography>
           <Typography variant="body2">
            Политика конфиденциальности.
