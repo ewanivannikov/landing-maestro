@@ -244,10 +244,7 @@ export function RouteComponent(): React.JSX.Element {
           alignItems: 'center',
           justifyContent: 'center',
           minHeight: '100vh',
-          width: '100vw', // Занимает 100% ширины ОКНА, а не родителя
-          // Убираем все отступы, чтобы фон прилегал к краям
-          p: 0, 
-          // Стили для фона остаются здесь
+          width: '100%', // Занимает 100% ширины ОКНА, а не родителя
           backgroundImage: 'url(https://picsum.photos/seed/maestro-hero/1920/1080)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
@@ -318,10 +315,7 @@ export function RouteComponent(): React.JSX.Element {
           alignItems: 'center',
           justifyContent: 'center',
           minHeight: '100vh',
-          width: '100vw', // Занимает 100% ширины ОКНА, а не родителя
-          // Убираем все отступы, чтобы фон прилегал к краям
-          p: 0, 
-          // Стил
+          width: '100%', // Занимает 100% ширины ОКНА, а не родителя
         }}
       >
         <Typography variant="h3" component="h2" textAlign="center" gutterBottom mb={4}>
@@ -343,7 +337,7 @@ export function RouteComponent(): React.JSX.Element {
       </Box>
 
       {/* ======================== СЕКЦИЯ 3: ГЕРОЙ В ЦЕНТРЕ ИСТОРИИ ======================== */}
-      <Box component="section" sx={{ p: { xs: 2, md: 6 }, width: '100%', backgroundColor: '#f5f5f5' }}>
+      <Box component="section" sx={{width: '100%', backgroundColor: '#f5f5f5' }}>
         <Stack alignItems="center" spacing={4} maxWidth="1200px" mx="auto">
           <Typography variant="h3" component="h2" textAlign="center" gutterBottom>
             Путь Маэстро: от блокады до европейских сцен
@@ -447,7 +441,7 @@ export function RouteComponent(): React.JSX.Element {
       </Box>
       
       {/* ======================== СЕКЦИЯ 6: ПРОИЗВОДСТВО ======================== */}
-      <Box component="section" sx={{ p: { xs: 2, md: 6 }, width: '100%', backgroundColor: '#f5f5f5' }}>
+      <Box component="section" sx={{width: '100%', backgroundColor: '#f5f5f5' }}>
         <Stack alignItems="center" spacing={4} maxWidth="1200px" mx="auto">
           <Typography variant="h3" component="h2" textAlign="center" gutterBottom>
             Загляните за кулисы
@@ -518,8 +512,6 @@ export function RouteComponent(): React.JSX.Element {
       {/* Футер */}
       <Box component="footer" sx={{
          width: '100%',
-         py: 3,
-         px: 2,
          mt: 'auto',
          backgroundColor: (theme) =>
            theme.palette.mode === 'light'
