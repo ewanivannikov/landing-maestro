@@ -245,7 +245,7 @@ export function RouteComponent(): React.JSX.Element {
           justifyContent: 'center',
           minHeight: '100vh',
           width: '100%', // Занимает 100% ширины ОКНА, а не родителя
-          backgroundImage: 'url(https://picsum.photos/seed/maestro-hero/1920/1080)',
+          backgroundImage: 'url(/assets/photo_2025-07-03_22-11-33.jpg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundColor: 'rgba(0, 0, 0, 0.6)',
@@ -267,13 +267,13 @@ export function RouteComponent(): React.JSX.Element {
           }}
         >
           {/* Вся "начинка" теперь живет здесь */}
-          <Typography 
-            variant="h1" 
-            component="h1" 
-            fontWeight="bold" 
-            sx={{ 
-              textShadow: '2px 2px 8px rgba(0,0,0,0.7)',
-              fontSize: { xs: '3rem', md: '5rem' } // Немного уменьшил для ПК
+          <Typography
+            variant="h1" // Используем семантически правильный тег h1
+            sx={{
+              fontFamily: 'Cormorant Garamond', // Явно указываем шрифт
+              fontSize: { xs: '5rem', md: '6rem' }, // Адаптивный размер (как пример)
+              // Можно использовать и классы Tailwind внутри sx, если настроен twin.macro,
+              // но прямой синтаксис надежнее
             }}
           >
             Маэстро

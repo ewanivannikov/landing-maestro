@@ -15,7 +15,10 @@ import { theme } from '~/setup/theme'
 
 export const Route = createRootRoute({
   head: () => ({
-    links: [{ rel: 'stylesheet', href: fontsourceVariableRobotoCss }],
+    links: [{ rel: 'stylesheet', href: fontsourceVariableRobotoCss },
+    { rel: "preconnect",  href: "https://fonts.googleapis.com" },
+    { rel: "preconnect",  href: "https://fonts.gstatic.com" },
+    { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=UoqMunThenKhung&display=swap' },],
   }),
   component: RootComponent,
 })
