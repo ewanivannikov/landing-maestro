@@ -294,7 +294,7 @@ export function RouteComponent(): React.JSX.Element {
             <iframe
               width="100%"
               height="100%"
-              src="https://www.youtube.com/embed/4_JVrkIOfBU?si=s9hGz1b4b-umNplq"
+              src="https://vk.com/video_ext.php?oid=-38519472&id=456239083&hd=4&autoplay=1"
               title="YouTube video player"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               style={{ border: 0 }}
