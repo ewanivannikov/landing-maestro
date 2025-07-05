@@ -14,13 +14,18 @@ import {
   CardMedia,
   useMediaQuery,
   useTheme,
+  TextField,
+  CircularProgress, // НОВОЕ: Индикатор загрузки
+  Alert,            // НОВОЕ: Плашка с сообщением о статусе
 } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
 import { VkIcon } from '~/components/VkIcon';
 import TelegramIcon from '@mui/icons-material/Telegram'
 import YouTubeIcon from '@mui/icons-material/YouTube'
-import z from 'zod'
-import React, { useState } from 'react'
+import EuroSymbolIcon from '@mui/icons-material/EuroSymbol';
+import GroupsIcon from '@mui/icons-material/Groups';
+import ShareIcon from '@mui/icons-material/Share';
+import React, { useState, useRef } from 'react'
 // FIX: Импортируем тип Settings для настроек слайдера
 import Slider, { Settings } from 'react-slick'
 
@@ -35,6 +40,37 @@ import 'slick-carousel/slick/slick-theme.css'
 //   component: RouteComponent,
 // })
 
+// ======================== ОБНОВЛЕННЫЙ ШЛЮЗ-ЗАГЛУШКА ========================
+/**
+ * Имитирует асинхронный запрос к платежному шлюзу.
+ * @param amount - Сумма платежа в рублях.
+ * @param logCallback - Функция обратного вызова для логирования шагов процесса на экране.
+ * @returns Promise, который разрешается с объектом успеха или отклоняется с ошибкой.
+ */
+function mockPaymentGateway(
+  amount: number,
+  logCallback: (message: string) => void // <--- НОВЫЙ АРГУМЕНТ
+): Promise<{ transactionId: string; amount: number }> {
+  
+  logCallback(`[ШЛЮЗ] Запрос на оплату ${amount} ₽ получен. Отправляем...`);
+
+  return new Promise((resolve, reject) => {
+    logCallback('[ШЛЮЗ] Ожидание ответа от банка...');
+    
+    setTimeout(() => {
+      if (Math.random() > 0.2) {
+        const transactionId = `mock_trx_${Date.now()}`;
+        logCallback(`[ШЛЮЗ] УСПЕХ. Транзакция ${transactionId} одобрена.`);
+        resolve({ transactionId, amount });
+      } else {
+        logCallback('[ШЛЮЗ] ОШИБКА. Банк отклонил операцию.');
+        reject(new Error('Не удалось обработать платеж'));
+      }
+    }, 2000);
+  });
+}
+// ====================================================================
+
 // FIX: Создаем интерфейс для объекта события, чтобы использовать его повторно
 interface TimelineEvent {
   year: string
@@ -44,6 +80,46 @@ interface TimelineEvent {
 
 // FIX: Добавляем тип возвращаемого значения для компонента
 export function RouteComponent(): React.JSX.Element {
+  // Состояния для процесса оплаты
+  const [isLoading, setIsLoading] = useState(false);
+  const [paymentStatus, setPaymentStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
+  const [customAmount, setCustomAmount] = useState('');
+  
+  // НОВОЕ: Состояние для хранения логов, которые будут видны на экране
+  const [logMessages, setLogMessages] = useState<string[]>([]);
+
+  // Обработчик платежа, который вызывает наш шлюз
+  const handlePayment = async (amount: number) => {
+    if (amount <= 0) {
+      setPaymentStatus({ type: 'error', message: 'Пожалуйста, введите корректную сумму.' });
+      return;
+    }
+    
+    setIsLoading(true);
+    setPaymentStatus(null);
+    setLogMessages([]); // НОВОЕ: Очищаем старые логи перед новым платежом
+
+    // НОВОЕ: Функция-логгер, которую мы передадим в шлюз
+    const logOnScreen = (message: string) => {
+      // Обновляем состояние, добавляя новое сообщение к предыдущим
+      setLogMessages(prevMessages => [...prevMessages, message]);
+    };
+  
+  try {
+      // ИЗМЕНЕНО: Передаем logOnScreen как второй аргумент
+      const result = await mockPaymentGateway(amount, logOnScreen);
+      setPaymentStatus({ type: 'success', message: `Спасибо! Ваш вклад в размере ${result.amount} ₽ успешно получен.` });
+    } catch (error) {
+      setPaymentStatus({ type: 'error', message: 'Произошла ошибка при оплате. Пожалуйста, попробуйте еще раз.' });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const supportSectionRef = useRef<HTMLElement | null>(null);
+  const handleScrollToSupport = () => {
+    supportSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
   // FIX: Четко указываем тип для состояния: это может быть объект события или null
   const [modalOpen, setModalOpen] = useState(false)
   const [selectedEvent, setSelectedEvent] = useState<TimelineEvent | null>(null)
@@ -300,7 +376,12 @@ export function RouteComponent(): React.JSX.Element {
               style={{ border: 0 }}
             ></iframe>
           </Box>
-          <Button variant="contained" size="large" color="primary">
+          <Button 
+            variant="contained" 
+            size="large" 
+            color="primary"
+            onClick={handleScrollToSupport} // <--- ИСПОЛЬЗУЕМ ФУНКЦИЮ
+          >
             ПОДДЕРЖАТЬ ПРОЕКТ
           </Button>
         </Stack>
@@ -328,7 +409,7 @@ export function RouteComponent(): React.JSX.Element {
           <iframe
             width="100%"
             height="100%"
-            src="https://www.youtube.com/embed/7vaiq0qxPmw?si=9NtK-W5Ug4j9Bo-O"
+            src="https://vk.com/video_ext.php?oid=-38519472&id=456239088&hd=4&autoplay=1"
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             style={{ border: 0 }}
@@ -395,8 +476,103 @@ export function RouteComponent(): React.JSX.Element {
         </Box>
       </Modal>
 
+      {/* ======================== СЕКЦИЯ 4: ПОДДЕРЖАТЬ ПРОЕКТ (С ВИДИМЫМ ЛОГОМ) ======================== */}
+      <Box
+        id="support-section"
+        ref={supportSectionRef} 
+        component="section"
+        sx={{ p: { xs: 2, md: 6 }, width: '100%', backgroundColor: '#f0f4f8' }}
+      >
+        <Stack alignItems="center" spacing={2} maxWidth="1200px" mx="auto">
+          {/* ... Заголовки и текст без изменений ... */}
+          <Typography variant="h3" component="h2" textAlign="center">
+            Станьте частью истории. Поддержите фильм «Маэстро»
+          </Typography>
+          <Typography textAlign="center" color="text.secondary" maxWidth="lg">
+            Мы собрали уникальный материал...
+          </Typography>
+          
+          {/* ... Блок статуса без изменений ... */}
+          {paymentStatus && (
+            <Alert severity={paymentStatus.type} sx={{ width: '100%', mt: 2 }}>
+              {paymentStatus.message}
+            </Alert>
+          )}
+
+          {/* НОВОЕ: Блок для отображения логов процесса */}
+          {logMessages.length > 0 && (
+            <Box
+              sx={{
+                width: '100%',
+                bgcolor: 'grey.900',
+                color: 'common.white',
+                fontFamily: 'monospace',
+                p: 2,
+                borderRadius: 1,
+                mt: 2,
+                maxHeight: '150px',
+                overflowY: 'auto', // Добавляем скролл, если логов много
+              }}
+            >
+              {logMessages.map((msg, index) => (
+                <div key={index}>{msg}</div>
+              ))}
+            </Box>
+          )}
+
+          <Grid container spacing={5} mt={0}>
+            {/* ... Остальной код Grid, кнопок и полей ввода остается без изменений ... */}
+            <Grid item xs={12} md={8}>
+              <Stack spacing={3}>
+                <Typography variant="h5" component="h3">Внести донат</Typography>
+                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+                  <Button variant="outlined" size="large" onClick={() => handlePayment(500)} disabled={isLoading}>500 ₽ (на оцифровку архивов)</Button>
+                  <Button variant="outlined" size="large" onClick={() => handlePayment(1500)} disabled={isLoading}>1500 ₽ (на аренду оборудования)</Button>
+                  <Button variant="outlined" size="large" onClick={() => handlePayment(5000)} disabled={isLoading}>5000 ₽ (на съемочный день)</Button>
+                </Stack>
+                <Stack direction="row" spacing={2} alignItems="center">
+                  <TextField 
+                    label="Другая сумма" 
+                    variant="outlined" 
+                    type="number" 
+                    value={customAmount}
+                    onChange={(e) => setCustomAmount(e.target.value)}
+                    disabled={isLoading}
+                  />
+                  <Button 
+                    variant="contained" 
+                    size="large" 
+                    onClick={() => handlePayment(Number(customAmount))} 
+                    disabled={isLoading}
+                    sx={{ position: 'relative' }}
+                  >
+                    {isLoading ? <CircularProgress size={24} color="inherit" /> : 'Пожертвовать'}
+                  </Button>
+                </Stack>
+              </Stack>
+            </Grid>
+            
+            {/* ... Правая колонка без изменений ... */}
+            <Grid item xs={12} md={4}>
+              <Stack spacing={4}>
+                <Box>
+                  <Typography variant="h6" component="h3" gutterBottom>Стать спонсором</Typography>
+                  <Typography variant="body2" mb={1}>Предлагаем пакеты для партнеров...</Typography>
+                  <Button variant="contained" color="secondary" href="mailto:maestro.film.sponsor@email.com">Связаться с продюсером</Button>
+                </Box>
+                <Box>
+                  <Typography variant="h6" component="h3" gutterBottom>Помочь информационно</Typography>
+                  <Typography variant="body2" mb={1}>Лучшая помощь — рассказать о нашем проекте...</Typography>
+                  <Button variant="contained" color="secondary">Поделиться</Button>
+                </Box>
+              </Stack>
+            </Grid>
+          </Grid>
+        </Stack>
+      </Box>
+
       {/* ======================== СЕКЦИЯ 5: КОМАНДА ======================== */}
-      <Box component="section" sx={{ p: { xs: 2, md: 6 }, maxWidth: '1200px' }}>
+      <Box component="section" sx={{ maxWidth: '1200px' }}>
         <Stack alignItems="center" spacing={4}>
            <Typography variant="h3" component="h2" textAlign="center">
             О команде
